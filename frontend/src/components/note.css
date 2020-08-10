@@ -1,0 +1,43 @@
+/* @import '~antd/dist/antd.css'; */
+
+.Note {
+    width: 42vh;
+    height: 42vh;
+    background-color: #FEFF9C;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    position: absolute;
+    color: gray;
+    box-shadow: 4px 4px 8px;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.pin {
+    display: flex;
+    width: 50px;
+    height: 45px;
+    justify-self: center;
+    margin: auto;
+    /* padding-left: 20px; */
+}
+
+.title {
+    font-weight: 600;
+    border-bottom: 1px grey;
+    color: black;
+    width: fit-content;
+    margin: auto;
+}
+
+.content{
+    text-align: start;
+    color: black;
+}
+
+.save {
+    width: 5vh;
+    height: 5vh;
+}

@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      noteList: []
+      noteList: [],
     }
   }
 
@@ -28,20 +28,72 @@ class App extends React.Component {
       )
   }
 
-  noteSelect(index) {
-    console.log(index);
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+  createNote() {
+    console.log("Create")
+    let url = `http://127.0.0.1:7000/api/note-create/`
+
+    let csrftoken = this.getCookie('csrftoken');
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'X-CSRFToken': csrftoken,
+      },
+      body: JSON.stringify({ title: 'Title', content: 'Text' })
+    }).catch((error) => {
+      console.log('ERROR:', error)
+    }).then(() => {
+      this.getNotes();
+    })
+  }
+
+  deleteNote(id){
+    let url = `http://127.0.0.1:7000/api/note-delete/${id}/`
+
+    let csrftoken = this.getCookie('csrftoken');
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+    }).then((response) => {
+        this.getNotes();
+    })
   }
   render() {
     return (
-      <div className="App">
-        <Header />
+      <body>
+      <div className="App" >
+        <Header onCreate={() => this.createNote()}/>
         <div className="notes">
           {/* <Note title="Title" content="This is a note component"/> */}
           {this.state.noteList.map((note, index) => 
-            <Note akey={note.id} title={note.title} content={note.content} onClick={this.noteSelect(index)} />
+          <div className="note-wrapper">
+            <Note key={note.id} id={note.id} title={note.title} content={note.content} DeleteNote={() => this.deleteNote(note.id)} />
+          </div>
           )}
+            {/* <Note key="400" id={400} title={"Second one"} content={"blah blah blah"}/> */}
         </div>
       </div>
+      </body>
     );
   }
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import './note.css'
+import './note.css';
 import pin from '../pin.png';
 import save from '../save.png';
 import saveTwo from '../save-icon.png';
-// import ReactRichEditor from 'react-rich-text-editor'
+import trash from '../delete.png';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
@@ -22,7 +22,7 @@ class Note extends React.Component {
             noteList: [],
             title: props.title,
             content: props.content,
-            id: props.akey
+            id: props.id
         }
 
         this.dragStart = this.dragStart.bind(this);
@@ -145,6 +145,7 @@ class Note extends React.Component {
                         }}
                     />
                 </div>
+                <input className="delete" type="image" src={trash} onClick={this.props.DeleteNote}/>
             </div>
         );
     }

@@ -1,6 +1,29 @@
 .Header {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
     background-color: black;
-    color: white;
+    color: rgb(131, 243, 159);
+    /* background-color: white;
+    color: black; */
     padding: 1.5vh;
     font-weight: 600;
+}
+
+.vl {
+    /* border-left: 2px solid rgb(110, 247, 144); */
+    border-left: 1.75px solid rgb(129, 233, 155);
+    height: 27px;
+    margin-left: 2vh;
+}
+
+.add {
+    margin-left: 6vh;
+    width: 4.25vh;
+    height: 4.25vh;
+}
+
+.add:hover {
+    background-color: rgb(39, 39, 39);
+    border: 1px white;
 }

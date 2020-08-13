@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/header.js';
 import Note from './components/note.js';
@@ -31,20 +30,19 @@ class App extends React.Component {
   getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
+      }
     }
     return cookieValue;
-}
+  }
 
   createNote() {
-    console.log("Create")
     let url = `http://127.0.0.1:7000/api/note-create/`
 
     let csrftoken = this.getCookie('csrftoken');
@@ -63,36 +61,34 @@ class App extends React.Component {
     })
   }
 
-  deleteNote(id){
+  deleteNote(id) {
     let url = `http://127.0.0.1:7000/api/note-delete/${id}/`
 
     let csrftoken = this.getCookie('csrftoken');
 
     fetch(url, {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'X-CSRFToken': csrftoken,
-        },
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        'X-CSRFToken': csrftoken,
+      },
     }).then((response) => {
-        this.getNotes();
+      this.getNotes();
     })
   }
   render() {
     return (
       <body>
-      <div className="App" >
-        <Header onCreate={() => this.createNote()}/>
-        <div className="notes">
-          {/* <Note title="Title" content="This is a note component"/> */}
-          {this.state.noteList.map((note, index) => 
-          <div className="note-wrapper">
-            <Note key={note.id} id={note.id} title={note.title} content={note.content} DeleteNote={() => this.deleteNote(note.id)} />
+        <div className="App" >
+          <Header onCreate={() => this.createNote()} />
+          <div className="notes">
+            {this.state.noteList.map((note, index) =>
+              <div className="note-wrapper">
+                <Note key={note.id} id={note.id} title={note.title} content={note.content} DeleteNote={() => this.deleteNote(note.id)} />
+              </div>
+            )}
           </div>
-          )}
-            {/* <Note key="400" id={400} title={"Second one"} content={"blah blah blah"}/> */}
         </div>
-      </div>
       </body>
     );
   }

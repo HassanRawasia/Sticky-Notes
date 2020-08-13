@@ -1,8 +1,6 @@
 import React from 'react';
 import './note.css';
 import pin from '../pin.png';
-import save from '../save.png';
-import saveTwo from '../save-icon.png';
 import trash from '../delete.png';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -145,7 +143,7 @@ class Note extends React.Component {
                         }}
                     />
                 </div>
-                <input className="delete" type="image" src={trash} onClick={this.props.DeleteNote}/>
+                <input className="delete" type="image" src={trash} onClick={this.props.DeleteNote} />
             </div>
         );
     }

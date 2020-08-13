@@ -1,19 +1,12 @@
 body {
-    background-image: url(./background2.jpg);
+    background-image: url(./background.jpg);
     background-size: contain;
     background-attachment: fixed;
 }
 
 .notes {
-    /* display: flex;
-    justify-content: start; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(292px, auto);
     padding-left: 3vh;
-    /* grid-gap: 10px; */
-}
-
-.note-wrapper {
-    resize: both;
 }
